@@ -1111,44 +1111,6 @@ VT/Carilion Medicl Sch/Res Ins
     R1059
     R2139
     R3012
-VT/UVA Northern VA Ctr
-    100
-    101
-    102
-    103
-    106
-    110
-    111
-    113
-VT/UVA Northern VA Ctr
-    100
-    101
-    102
-    103
-    106
-    110
-    111
-    113
-    204
-    205
-    206
-    207
-    214
-    217
-    219
-    221
-    313
-    316
-    318
-    320
-    322
-    323
-    324
-    325
-    326
-    351
-    C4
-    T3
 Vet Med Instructional Addition
     220
 Vet Med Phase 1
