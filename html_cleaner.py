@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 TAG_RE = re.compile(r'<[^>]+>')
 
 def remove_tags(text):
-    return TAG_RE.sub('', text)
+    return TAG_RE.sub(' ', text)
 
 # inputfile = open('events_example.html')
 # my_text = inputfile.readlines()
