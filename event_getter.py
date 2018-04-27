@@ -38,10 +38,10 @@ for line in reversed(my_text):
 # 	print(building)
 # 	print("\n")
 
-# #print the list of buildings by room
-# for building in reversed(buildings):
-# 	for room in reversed(building[1:]):
-# 		print(building[0] + ": " + room)
+#print the list of buildings by room
+for building in reversed(buildings):
+	for room in reversed(building[1:]):
+		print(building[0] + ": " + room)
 
 #Initialize Driver
 driver = webdriver.Chrome()
