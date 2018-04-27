@@ -172,26 +172,37 @@ def convert_to_datetime(time):
 	start_out_time = datetime.strftime(start_in_time, "%H:%M")
 	end_in_time = datetime.strptime(times[1], "%I:%M %p")
 	end_out_time = datetime.strftime(end_in_time, "%H:%M")
-	return [start_out_time,end_out_time]
+	return start_out_time + " - " + end_out_time
 
 
 #Testing convert_to_datetime
 #print(convert_to_datetime("7:00 AM - 10:59 PM"))
 
 
-#Nice output for a specific room schedule
-def output_schedule_by_room(building,room):
+#Get the sorted order of times by dict keys
+def get_sorted_times(building,room):
 	class_sched = class_dict[building][room]
 	event_sched = event_dict[building][room]
 	combined_times = []
+	time_dict = {}
+	sorted_times = []
+	#Gets the times from classes
 	for key in class_sched:
 		#print(key + " class")
 		combined_times.append(key)
+	#Gets the times from events
 	for key in event_sched:
 		#print(key + " event")
 		combined_times.append(key)
-	for time in sorted(combined_times):
-		print("")
+	#Converts the times for sorting
+	for time in combined_times:
+		time_dict[convert_to_datetime(time)] = time
+	#Outputs sorted times in 24H
+	# for key in collections.OrderedDict(sorted(time_dict.items())):
+	# 	print(key)
+	for key in collections.OrderedDict(sorted(time_dict.items())):
+		sorted_times.append(time_dict[key])
+	return sorted_times
 
 #Testing output_schedule_by_room
 output_schedule_by_room(building_name,room_number)
