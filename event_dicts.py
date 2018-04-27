@@ -1,5 +1,6 @@
 import copy
 import collections
+from datetime import datetime
 
 inputfile = open('Rooms by Building.txt')
 my_text = inputfile.readlines()
@@ -156,12 +157,41 @@ def get_schedules(building, rooms):
 	return class_schedules
 
 #Testing get_schedules
-building_name = "Cowgill Hall"
-room_number = "300"
-room_list = get_nearby(building_name,room_number)
-for index,schedule in enumerate(get_schedules(building_name,room_list)):
-	print("Building: " + building_name + " Room: " + room_list[index])
-	print(get_schedules(building_name,get_nearby(building_name,room_number))[index])
-	print()
+building_name = "Burruss Hall"
+room_number = "116"
+# room_list = get_nearby(building_name,room_number)
+# for index,schedule in enumerate(get_schedules(building_name,room_list)):
+# 	print("Building: " + building_name + " Room: " + room_list[index])
+# 	print(get_schedules(building_name,get_nearby(building_name,room_number))[index])
+# 	print()
 
-#Nice output for a specific schedule
+#Converts a time range string to datetime
+def convert_to_datetime(time):
+	times = time.split(' - ')
+	start_in_time = datetime.strptime(times[0], "%I:%M %p")
+	start_out_time = datetime.strftime(start_in_time, "%H:%M")
+	end_in_time = datetime.strptime(times[1], "%I:%M %p")
+	end_out_time = datetime.strftime(end_in_time, "%H:%M")
+	return [start_out_time,end_out_time]
+
+
+#Testing convert_to_datetime
+#print(convert_to_datetime("7:00 AM - 10:59 PM"))
+
+
+#Nice output for a specific room schedule
+def output_schedule_by_room(building,room):
+	class_sched = class_dict[building][room]
+	event_sched = event_dict[building][room]
+	combined_times = []
+	for key in class_sched:
+		#print(key + " class")
+		combined_times.append(key)
+	for key in event_sched:
+		#print(key + " event")
+		combined_times.append(key)
+	for time in sorted(combined_times):
+		print("")
+
+#Testing output_schedule_by_room
+output_schedule_by_room(building_name,room_number)
