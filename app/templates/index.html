@@ -8,12 +8,28 @@
 	  </div>
 	</form>
 
-	{% if result %}
-		{% for schedule in result %}
-			<h6>{{ schedule }} </h6>
+	{% if rooms %}
+		{% for room in rooms %}
+			{% if total_dict[building][room] %}
+				<h2>{{building + ", Room " + rooms[loop.index0] }}</h2>
+			{% endif %}
+				{% set sorted_times = get_sorted_times(building,room) %}
+				{% for time in sorted_times %}
+				<table class = "table table-bordered table-condensed" width="400" >
+						<tr>{{ time }}</tr>
+						{% for day in days %}
+							{% if total_dict[building][room][time][day] %}
+								<th>{{ day }}</th>
+								<td>{{ total_dict[building][room][time][day] }}</td>
+							{% endif %}
+						{% endfor %}
+				{% endfor %}
+			</table>
 		{% endfor %}
 	{% else %}
 		<h6>Invalid Search</h6>
 	{% endif %}
+	
+
 
 {% endblock %}

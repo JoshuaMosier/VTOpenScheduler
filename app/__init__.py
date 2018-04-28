@@ -19,21 +19,28 @@ def index():
 def handle_data():
     search = request.form['searchInput']
     split = search.split(' ')
+    codes = event_dicts.get_build_codes()
     if len(split) == 2:
-    	if split[0] in event_dicts.total_dict and split[1] in event_dicts.total_dict[bldg]:
-    		result = event_dicts.get_nearby_schedules(split[0],split[1])
+    	building = split[0]
+    	room = split[1]
+    	if building in codes:
+    		building = codes[building]
+    		rooms = event_dicts.get_nearby(building,room)
     	else:
     		result = None
+    		rooms = None
     elif len(split) == 3:
-    	bldg = ' '.join(split[:2])
-    	rm = split[2]
-    	if bldg in event_dicts.total_dict and rm in event_dicts.total_dict[bldg]:
-    		result = event_dicts.get_nearby_schedules(bldg,rm)
+    	building = ' '.join(split[:2])
+    	room = split[2]
+    	if building in event_dicts.total_dict and room in event_dicts.total_dict[building]:
+    		rooms = event_dicts.get_nearby(building,room)
     	else:
     		result = None
     else:
     	result = None
-    return render_template('index.html', result = result)
+    return render_template('index.html', building = building, rooms = rooms, total_dict = event_dicts.total_dict, days = event_dicts.days)
+
+app.jinja_env.globals.update(get_sorted_times = event_dicts.get_sorted_times)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -76,20 +76,20 @@ for line in reversed(my_text):
 # for key in total_dict.items():
 # 	print(key)
 
-#Create Dictionary of Building codes --> Buidlings
-inputfile = open('textfiles/Building Names.txt')
-my_text = inputfile.readlines()
-build_codes = {}
-
-for line in my_text:
-	split = line.split(' - ')
-	key = split[0].strip()
-	name = split[1].strip()
-	build_codes[key] = name
-
+def get_build_codes():
+	inputfile = open('textfiles/Building Names.txt')
+	my_text = inputfile.readlines()
+	build_codes = {}
+	for line in my_text:
+		split = line.split(' - ')
+		key = split[0].strip()
+		name = split[1].strip()
+		build_codes[key] = name
+	return build_codes
 
 #Get a list of rooms for a given building name or building key
 def get_room_list(building):
+	build_codes = get_build_codes()
 	if building in build_dict.keys():
 		room_dict = build_dict[building]
 	elif build_codes[building] in build_dict.keys():
