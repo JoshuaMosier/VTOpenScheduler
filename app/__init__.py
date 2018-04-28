@@ -18,9 +18,21 @@ def index():
 @app.route('/handle_data', methods=['POST'])
 def handle_data():
     search = request.form['searchInput']
-    bldg = search.split(' ')[0]
-    rm = search.split(' ')[1]
-    result = event_dicts.get_nearby_schedules(bldg,rm)
+    split = search.split(' ')
+    if len(split) == 2:
+    	if split[0] in event_dicts.total_dict and split[1] in event_dicts.total_dict[bldg]:
+    		result = event_dicts.get_nearby_schedules(split[0],split[1])
+    	else:
+    		result = None
+    elif len(split) == 3:
+    	bldg = ' '.join(split[:2])
+    	rm = split[2]
+    	if bldg in event_dicts.total_dict and rm in event_dicts.total_dict[bldg]:
+    		result = event_dicts.get_nearby_schedules(bldg,rm)
+    	else:
+    		result = None
+    else:
+    	result = None
     return render_template('index.html', result = result)
 
 if __name__ == '__main__':
