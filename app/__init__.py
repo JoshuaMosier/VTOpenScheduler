@@ -38,9 +38,11 @@ def handle_data():
     		result = None
     else:
     	result = None
-    return render_template('index.html', building = building, rooms = rooms, total_dict = event_dicts.total_dict, days = event_dicts.days)
+    return render_template('index.html', building = building, rooms = rooms, total_dict = event_dicts.total_dict, days = event_dicts.get_day_list())
 
 app.jinja_env.globals.update(get_sorted_times = event_dicts.get_sorted_times)
+app.jinja_env.globals.update(get_string_format = event_dicts.get_string_format)
+app.jinja_env.globals.update(get_list_format = event_dicts.get_list_format)
 
 if __name__ == '__main__':
     app.run(debug=True)
