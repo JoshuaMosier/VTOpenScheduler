@@ -1,5 +1,6 @@
 import copy
 import collections
+from datetime import datetime
 
 inputfile = open('Rooms by Building.txt')
 my_text = inputfile.readlines()
@@ -24,84 +25,55 @@ days = {'mon': [], 'tues': [], 'wed': [], 'thurs': [], 'fri': [], 'sat': [], 'su
 currTime = {}
 
 #This gets a dictionary for classes
-class_dict = copy.deepcopy(build_dict)
+total_dict = copy.deepcopy(build_dict)
 for line in reversed(my_text):
 	#Gets the current Building/Room Pair
 	if '    ' not in line:
 		currB = line.split(':')[0].strip()
 		currR = line.split(':')[1].strip()
-		class_dict[currB][currR] = currTime
+		total_dict[currB][currR] = currTime
 		currTime = {}
 		#print(buildings[currB][currR])
-	elif 'classTime' in line:
+	elif 'Time' in line:
 		currTime[line.split('                ')[1].strip()] = days
 		days = {'mon': [], 'tues': [], 'wed': [], 'thurs': [], 'fri': [], 'sat': [], 'sun': []}
-	elif 'Classes' in line:
+	elif 'Classes'  or 'Events' in line:
 		for key in days:
 			if key in line:
-				class_info = []
-				removed_day = line.split('                    ',1)[1].strip()
-				sep_classes = removed_day.split('    ')
-				for info in sep_classes:
-					#Subject + Course number, CRN, Prof
-					removed_subj = info.split("CRN: ")[0].strip()
-					CRN = info.split("CRN: ")[1][:5].strip()
-					prof = info.split("CRN: ")[1][5:].strip()
-					class_info.append(removed_subj)
-					class_info.append(CRN)
-					class_info.append(prof)
-				days[key] = class_info
-
-#reset stuff in case its breaking
-inputfile.close()
-
-inputfile = open('sorted_times.txt')
-my_text = inputfile.readlines()
-days = {'mon': [], 'tues': [], 'wed': [], 'thurs': [], 'fri': [], 'sat': [], 'sun': []}
-currTime = {}
-
-#This gets a dictionary for events
-event_dict = copy.deepcopy(build_dict)
-for line in reversed(my_text):
-	#Gets the current Building/Room Pair
-	if '    ' not in line:
-		currB = line.split(':')[0].strip()
-		currR = line.split(':')[1].strip()
-		event_dict[currB][currR] = currTime
-		currTime = {}
-		#print(buildings[currB][currR])
-	elif 'eventTime' in line:
-		currTime[line.split('                ')[1].strip()] = days
-		days = {'mon': [], 'tues': [], 'wed': [], 'thurs': [], 'fri': [], 'sat': [], 'sun': []}
-	elif 'Events_' in line:
-		for key in days:
-			if key in line:
-				#2/15/18 - 4/26/18  Club Meetings  D: Young Americans for Liberty N: Andrew Letzkus aletzkus@vt.edu (571) 292 &nbsp;
-				class_info = []
-				removed_day = line.split('                    ',1)[1].strip().replace("&nbsp;","")
-				date_range = removed_day.split('  ',1)[0].strip()
-				details = removed_day.split('  ',1)[1].strip()
-				purpose = details.split('  ',1)[0].strip()
-				sub_details = details.split('  ',1)[1].strip()
-				organizer = sub_details.split('N:')[1].strip()
-				group = sub_details.split('N:',1)[0].strip().replace('D: ',"")
-				class_info.append(date_range)
-				class_info.append(purpose)
-				class_info.append(group)
-				class_info.append(organizer)
-				#print(class_info)
-				days[key] = class_info
+				if 'Classes' in line:
+					class_info = []
+					removed_day = line.split('                    ',1)[1].strip()
+					sep_classes = removed_day.split('    ')
+					for info in sep_classes:
+						#Subject + Course number, CRN, Prof
+						removed_subj = info.split("CRN: ")[0].strip()
+						CRN = info.split("CRN: ")[1][:5].strip()
+						prof = info.split("CRN: ")[1][5:].strip()
+						class_info.append(removed_subj)
+						class_info.append(CRN)
+						class_info.append(prof)
+					days[key] = class_info
+				elif 'Events' in line:
+					class_info = []
+					removed_day = line.split('                    ',1)[1].strip().replace("&nbsp;","")
+					date_range = removed_day.split('  ',1)[0].strip()
+					details = removed_day.split('  ',1)[1].strip()
+					purpose = details.split('  ',1)[0].strip()
+					sub_details = details.split('  ',1)[1].strip()
+					organizer = sub_details.split('N:')[1].strip()
+					group = sub_details.split('N:',1)[0].strip().replace('D: ',"")
+					class_info.append(date_range)
+					class_info.append(purpose)
+					class_info.append(group)
+					class_info.append(organizer)
+					days[key] = class_info
 
 # #Print out the keys for the building
 # for key in build_dict.items():
 # 	print(key)
 
-# #Print out the keys for classes
-# for key in class_dict.items():
-# 	print(key)
-
-# #Print out the keys for events
-# for key in event_dict.items():
+# #Print out the keys for classes/events
+# for key in total_dict.items():
 # 	print(key)
 
 #Create Dictionary of Building codes --> Buidlings
@@ -152,16 +124,98 @@ def get_nearby(building,room):
 def get_schedules(building, rooms):
 	class_schedules = []
 	for room in rooms:
-		class_schedules.append(class_dict[building][room])
+		class_schedules.append(total_dict[building][room])
 	return class_schedules
 
-#Testing get_schedules
-building_name = "Cowgill Hall"
-room_number = "300"
-room_list = get_nearby(building_name,room_number)
-for index,schedule in enumerate(get_schedules(building_name,room_list)):
-	print("Building: " + building_name + " Room: " + room_list[index])
-	print(get_schedules(building_name,get_nearby(building_name,room_number))[index])
-	print()
+# #Testing get_schedules
+building_name = "TORG"
+room_number = "1010"
+# room_list = get_nearby(building_name,room_number)
+# for index,schedule in enumerate(get_schedules(building_name,room_list)):
+# 	print("Building: " + building_name + " Room: " + room_list[index])
+# 	print(get_schedules(building_name,get_nearby(building_name,room_number))[index])
+# 	print()
 
-#Nice output for a specific schedule
+#Converts a time range string to datetime
+def convert_to_datetime(time):
+	times = time.split(' - ')
+	start_in_time = datetime.strptime(times[0], "%I:%M %p")
+	start_out_time = datetime.strftime(start_in_time, "%H:%M")
+	end_in_time = datetime.strptime(times[1], "%I:%M %p")
+	end_out_time = datetime.strftime(end_in_time, "%H:%M")
+	return start_out_time + " - " + end_out_time
+
+
+#Testing convert_to_datetime
+#print(convert_to_datetime("7:00 AM - 10:59 PM"))
+
+
+#Get the sorted order of times by dict keys
+def get_sorted_times(building,room):
+	if building in total_dict:
+		class_sched = total_dict[building][room]
+	elif build_codes[building] in total_dict:
+		class_sched = total_dict[build_codes[building]][room]
+	else:
+		print("Incorrect Building or Building Code")
+	combined_times = []
+	time_dict = {}
+	sorted_times = []
+	#Converts the times for sorting
+	for time in class_sched:
+		time_dict[convert_to_datetime(time)] = time
+	#Outputs sorted times in 24H
+	# for key in collections.OrderedDict(sorted(time_dict.items())):
+	# 	print(key)
+	for key in collections.OrderedDict(sorted(time_dict.items())):
+		sorted_times.append(time_dict[key])
+	return sorted_times
+
+# #Testing get_sorted_times
+# print(get_sorted_times(building_name,room_number))
+
+#Get all the schedules from nearby rooms
+def get_nearby_schedules(building,selected_room):
+	room_list = get_nearby(building,selected_room)
+	schedules = []
+	for room in room_list:
+		schedules.append(get_sorted_times(building,room))
+	return schedules
+
+# #Testing get_nearby_schedules
+# schedules = get_nearby_schedules(building_name,room_number)
+# rooms_in_building = get_room_list(building_name)
+# for index,schedule in enumerate(schedules):
+# 	print("Building: " + building_name + " Room: " + rooms_in_building[index])
+# 	print(schedule)
+# 	print()
+
+#Print out an individual schedule real nice like
+def print_schedule(bldg,rm):
+	if bldg in total_dict:
+		building = bldg
+	elif build_codes[bldg] in total_dict:
+		building = build_codes[bldg]
+	else:
+		print("Incorrect Building or Building Code")
+	week = ['mon','tues','wed','thurs','fri','sat','sun']
+	times = get_sorted_times(building,room)
+	print("Building: " + building + " Room: " + room)
+	for time in times:
+		print('\t' +time)
+		for day in week:
+			if total_dict[building][room][time][day]:
+				print('\t\t' + day)
+			for event in total_dict[building][room][time][day]:
+				print('\t\t\t' + event)
+		print()
+
+
+#Tests print_schedule
+#print_schedule(building_name,room_number)
+
+#Tests printing out the schedules of all nearby rooms
+room_list = get_nearby(building_name,room_number)
+for room in room_list:
+	print_schedule(building_name,room)
+	print()
