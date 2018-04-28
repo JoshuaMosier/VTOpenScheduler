@@ -1,0 +1,20 @@
+- Potential Changes, Additions, Fixes -
+	
+	Search Checking:
+		-If the lowercase search matches a lowercase key, it should return the key
+		-Minor autocorrecting for correct keys?
+		
+	HTML Changes:
+		-Set standard time ranges (lowest --> longest by room)
+			-Probably by hour
+		-Display class times as ranges of time scale
+			-Use PScheduler?
+		-Add line break tags to event/class blocks
+
+	Add Advanced Search Options:
+		-Search time range by any building
+		-Search room schedule for future date
+		-Search largest openness by building
+
+	Improve Nearby Room Search
+		-Adjust it so it returns the same number of nearby rooms

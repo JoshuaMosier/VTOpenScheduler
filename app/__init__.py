@@ -17,6 +17,7 @@ def index():
 
 @app.route('/handle_data', methods=['POST'])
 def handle_data():
+	#TODO Move this method to event_dicts to check for existing building
     search = request.form['searchInput']
     split = search.split(' ')
     codes = event_dicts.get_build_codes()
@@ -36,7 +37,10 @@ def handle_data():
     		rooms = event_dicts.get_nearby(building,room)
     	else:
     		result = None
+    		rooms = None
     else:
+    	building = None
+    	rooms = None
     	result = None
     return render_template('index.html', building = building, rooms = rooms, total_dict = event_dicts.total_dict, days = event_dicts.get_day_list())
 
