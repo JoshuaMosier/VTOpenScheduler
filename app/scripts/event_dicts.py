@@ -212,7 +212,6 @@ def print_schedule(bldg,rm):
 				print('\t\t\t' + event)
 		print()
 
-
 #Tests print_schedule
 #print_schedule(building_name,room_number)
 
@@ -221,3 +220,34 @@ def print_schedule(bldg,rm):
 # for room in room_list:
 # 	print_schedule(building_name,room)
 # 	print()
+
+def get_day_list():
+	return ['mon','tues','wed','thurs','fri','sat','sun']
+
+def get_string_format(list):
+	#Start w/ Class, Prof, CRN 1
+	ret = "Class: " + list[0] + "\nProf: " + list[2] + "\nCRN: " + list[1]
+	if len(list) % 4 == 0:
+			ret = "Event: " + list[1] + "\nGroup: " + list[2]
+	else:
+		for index,entry in enumerate(list[3:]):
+			if index % 3 == 1:
+				ret = ret + ", " + list[index]
+	return ret
+
+def get_list_format(list):
+	#Start w/ Class, Prof, CRN 1
+	ret = []
+	ret.append("Class: " + list[0])
+	ret.append("Prof: " + list[2])
+	CRN = "CRN: " + list[1]
+	additional_crns = ""
+	if len(list) % 4 == 0:
+			ret = ["Date: " + list[0],"Event: " + list[1], "Group: " + list[2]]
+	else:
+		for index,entry in enumerate(list[3:]):
+			if index % 3 == 1:
+				additional_crns = additional_crns + ", " + list[index]
+		ret.append(CRN + additional_crns)
+	return ret
+
