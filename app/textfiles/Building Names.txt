@@ -1,0 +1,140 @@
+	AGNEW - Agnew Hall
+	LARNA - Alphin-Stuart Arena
+	AJ E - Ambler Johnston East
+	AJPAV - Animal Judging Pavilion
+	AQUAC - Aquaculture Facility
+	AA - Architectural Annex
+	ADRF - Architecture Demo &amp; Res Fac
+	ARMRY - Armory (Art)
+	ART C - Art &amp; Design Learning Center
+	BEEF - Beef Barn
+	BFH - Bishop-Favrao Hall
+	BRNCH - Branch Building
+	PRC - Brooder House
+	BURCH - Burchard Hall
+	BUR - Burruss Hall
+	CAM - Campbell Arena
+	CARNA - Campbell Arena
+	CAM M - Campbell Main
+	CAPRI - Capri Building
+	CSB - Career Services Building
+	LIBR - Carol M. Newman Library
+	COL - Cassell Coliseum
+	CMMID - Center Molecular Med Infec Dis
+	CSSER - Center for Space Sci &amp; Engr Re
+	CHEMP - Chemistry Physics Building
+	COLSQ - Collegiate Square
+	COLS2 - Collegiate Square Two
+	CEC - Continuing Education Center
+	CO - Cowgill Hall
+	CIC - Cranwell Int&#39;l Center
+	DAIRY - Dairy Barn
+	DAV - Davidson Hall
+	DER - Derring Hall
+	DTRIK - Dietrick Hall
+	DBHCC - Donaldson Brown Hotel &amp; Conf
+	DB - Donaldson-Brown Hall
+	DTNA - Downtown North
+	DURHM - Durham Hall
+	EGG E - Eggleston East
+	ENGEL - Engel Hall
+	FEM - Femoyer Hall
+	FST - Food Science &amp; Technology Lab
+	FRALN - Fralin Biotechnology Center
+	FSBRN - Free Stall Barn
+	GBJ - G. Burke Johnston Student Ctr
+	GOODW - Goodwin Hall
+	GLCDB - Graduate Life Ctr Dnldsn Brown
+	GH - Greenhouse
+	HAHN N - Hahn Hall North Wing
+	HAHN S - Hahn Hall South Wing
+	HARP - Harper
+	HEND - Henderson Hall
+	HILL - Hillcrest
+	HOLD - Holden Hall
+	HORSE - Horse Barn
+	HABB1 - Human &amp; Ag Biosciences Bldg 1
+	HUTCH - Hutcheson Hall
+	CRCIA - ICTAS A
+	TC - Indoor Tennis Courts
+	ICTAS - Inst for Crit Tech &amp; Appld Sci
+	ILSB - Integrated Life Sciences Bldg
+	HAN - John W. Hancock Jr. Hall
+	JCH - Julian Cheatham Hall
+	KENT - Kent Square
+	KAMF - Kroehling Adv Material Foundry
+	LANE - Lane Hall
+	STAD - Lane Stadium
+	LATH - Latham Hall
+	WLH - Lavery Hall
+	LEE - Lee
+	LARTS - Liberal Arts Building
+	LFSCI - Life Sciences I
+	LITRV - Litton-Reaves Hall
+	LYRIC - Lyric Theater
+	MAJWM - Major Williams Hall
+	EMPOR - Math Emporium
+	MCB - McBryde Hall
+	MCCOM - McComas Hall
+	MRYMN - Merryman Athletic Facility
+	MIL - Military Building/Laundry
+	MAC - Moss Arts Center
+	NCB - New Classroom Building
+	NEB - New Engineering Building
+	NHW - New Hall West
+	NEW - Newman
+	NOR - Norris Hall
+	GRNDP - Old Grand Piano Building
+	SEC - Old Security Building
+	OWENS - Owens Hall
+	PK - PK
+	PAM - Pamplin Hall
+	PAT - Patton Hall
+	PAYNE - Payne
+	PY - Peddrew-Yates
+	PAB - Performing Arts Building
+	PWCOM - Pointe West Commons
+	PRICE - Price Hall
+	P HSE - Price House
+	PRINT - Print Shop
+	PRT E - Pritchard East
+	PSC - Psychological Services Center
+	RAND - Randolph Hall
+	RCTR1 - Riverside Center 1
+	ROB - Robeson Hall
+	SANDY - Sandy Hall
+	SARDO - Sardo Laboratory
+	SAUND - Saunders Hall
+	SEITZ - Seitz Hall
+	SHANK - Shanks Hall
+	SHEEP - Sheep Barn
+	SHULT - Shultz Hall
+	SEB - Signature Engineering Building
+	SL TW - Slusher Tower
+	SLUSH - Slusher Wing
+	SM CC - Smith Career Center
+	SMYTH - Smyth Hall
+	SOL - Solitude
+	SQUIR - Squires Student Center
+	SURGE - Surge Space Building
+	SWINE - Swine Center
+	HAHN - T. Marshall Hahn, Jr. Hall
+	TESKE - Teske House
+	T101 - Theatre 101
+	CPAP - Thomas Conner House
+	TORG - Torgersen Hall
+	UPEST - Urban Pest Control Facility
+	VTC - VT/Carilion Medicl Sch/Res Ins
+	NOVAC - VT/UVA Northern VA Ctr
+	NVC - VT/UVA Northern VA Ctr
+	VMIA - Vet Med Instructional Addition
+	VM 1 - Vet Med Phase 1
+	VM 2 - Vet Med Phase 2
+	VM 3 - Vet Med Phase 3
+	VM4C1 - Vet Med Phase 4C-Non-Client
+	WAL - Wallace Hall
+	GYM - War Memorial Gymnasium
+	WHIT - Whittemore Hall
+	WMS - Williams Hall
+	BROOK - Wood Engineering Lab
+	BFPC - Wood Processing Lab
