@@ -115,6 +115,8 @@ def get_nearby(building,room):
 			lower = 0
 		if upper > len(room_list)-1:
 			upper = len(room_list)-1
+	else:
+		return None
 	return room_list[lower:upper]
 
 #Testing get_nearby

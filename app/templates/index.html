@@ -1,5 +1,16 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h5>{{total_dict}}</h5>
+	<form action ="{{ url_for('handle_data') }}" method="post">
+	  <div class="form-group">
+	    <label for="SearchFormInput">Enter Search</label>
+	    <input type="text" name = "searchInput" class="form-control" id="SearchFormInput" aria-describedby="emailHelp" placeholder="Ex: MCB 100 or Burruss Hall 216">
+	  </div>
+	</form>
+
+	{% if result %}
+		{% for schedule in result %}
+			<h6>{{ schedule }} </h6>
+		{% endfor %}
+	{% endif %}
 {% endblock %}
