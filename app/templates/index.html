@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
+	<!-- Main Search Form -->
 	<form action ="{{ url_for('handle_data') }}" method="post">
 	  <div class="form-group">
 	    <label for="SearchFormInput">Enter Search</label>
@@ -8,28 +9,44 @@
 	  </div>
 	</form>
 
-	{% if rooms %}
-		{% for room in rooms %}
-			{% if total_dict[building][room] %}
-				<h2>{{building + ", Room " + rooms[loop.index0] }}</h2>
-			{% endif %}
-				{% set sorted_times = get_sorted_times(building,room) %}
-				{% for time in sorted_times %}
-				<table class = "table table-bordered table-condensed" width="400" >
-						<tr>{{ time }}</tr>
-						{% for day in days %}
-							{% if total_dict[building][room][time][day] %}
-								<th>{{ day }}</th>
-								<td>{{ total_dict[building][room][time][day] }}</td>
-							{% endif %}
+	<!-- Print Out Room Schedules-->
+		<center>
+			{% if rooms %}
+				{% for room in rooms %}
+					{% if total_dict[building][room] %}
+						<h2>{{building + ", Room " + rooms[loop.index0] }}</h2>
+					<table class = "table table-bordered table-condensed" style="width:1600px">
+						{% set sorted_times = get_sorted_times(building,room) %}
+						<tr>
+							<th style="width:200px"></th>
+								{% for day in days %}
+									<th align="center" style="width:200px">{{ day }}</th>
+								{% endfor %}
+						</tr>
+					{% endif %}
+						{% for time in sorted_times %}
+								<tr>
+									<th align="center">{{ time }}</th>
+									{% for day in days %}
+										{% if total_dict[building][room][time][day] %}
+											<td align="center">
+												{% for line in get_list_format(total_dict[building][room][time][day]) %}
+													{{line}}<br>
+												{% endfor %}
+											</td>
+										{% else %}
+											<td></td>
+										{% endif %}
+									{% endfor %}
+								</tr>
 						{% endfor %}
+					</table>
 				{% endfor %}
-			</table>
-		{% endfor %}
-	{% else %}
-		<h6>Invalid Search</h6>
-	{% endif %}
-	
+			{% else %}
+				<h6>Invalid Search</h6>
+			{% endif %}
+		</center>
 
+	<!-- Do Something Else -->
 
 {% endblock %}
