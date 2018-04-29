@@ -1,11 +1,12 @@
 from flask import Flask
 from flask import request
+from datetime import date, datetime, timedelta
 
 app = Flask(__name__)
 
 from flask import render_template
 
-from scripts import event_dicts
+from python import event_dicts
 
 @app.route('/')
 
@@ -42,11 +43,14 @@ def handle_data():
     	building = None
     	rooms = None
     	result = None
-    return render_template('index.html', building = building, rooms = rooms, total_dict = event_dicts.total_dict, days = event_dicts.get_day_list())
+    return render_template('index.html', building = building, rooms = rooms, total_dict = event_dicts.total_dict, days = event_dicts.get_day_list(), time_span = event_dicts
+        .time_span())
 
 app.jinja_env.globals.update(get_sorted_times = event_dicts.get_sorted_times)
 app.jinja_env.globals.update(get_string_format = event_dicts.get_string_format)
 app.jinja_env.globals.update(get_list_format = event_dicts.get_list_format)
+app.jinja_env.globals.update(start_time = event_dicts.start_time)
+app.jinja_env.globals.update(get_event_length = event_dicts.get_event_length)
 
 if __name__ == '__main__':
     app.run(debug=True)

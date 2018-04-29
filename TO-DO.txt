@@ -1,9 +1,10 @@
 - Potential Changes, Additions, Fixes -
 	
 	Search Checking:
+		-Account for buildings w/ multiple spaces
 		-If the lowercase search matches a lowercase key, it should return the key
 		-Minor autocorrecting for correct keys?
-		
+
 	HTML Changes:
 		-Set standard time ranges (lowest --> longest by room)
 			-Probably by hour

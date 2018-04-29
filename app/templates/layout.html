@@ -7,12 +7,22 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  </head>
+    <script src="../javascript/modernizr.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script>
+      if( !window.jQuery ) document.write('<script src="js/jquery-3.0.0.min.js"><\/script>');
+    </script>
+    <script src="../javascript/main.js"></script> <!-- Resource jQuery -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="../css/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="../css/style.css"> <!-- Resource style -->
+    </body>
+    </head>
 
   <body id ="main">
     {% include 'includes/_navbar.html' %}
   	{% block body %}
-    <div class ="container"></div>
+    
     {% endblock %}
   </body>
   </html>

@@ -10,7 +10,7 @@
 	</form>
 
 	<!-- Print Out Room Schedules-->
-		<center>
+				<center>
 			{% if rooms %}
 				{% for room in rooms %}
 					{% if total_dict[building][room] %}
@@ -49,4 +49,49 @@
 
 	<!-- Do Something Else -->
 
+	<!--Test Room Schedules By TimeSlot -->
+		<center>
+			{% if rooms %}
+				{% for room in rooms %}
+					{% if total_dict[building][room] %}
+						<h2>{{building + ", Room " + rooms[loop.index0] }}</h2>
+					<table class = "table table-bordered table-condensed" style="width:1600px">
+						{% set sorted_times = get_sorted_times(building,room) %}
+						<tr>
+							<th style="width:200px"></th>
+								{% for day in days %}
+									<th align="center" style="width:200px">{{ day }}</th>
+								{% endfor %}
+						</tr>
+						{% for time in time_span %}
+								<tr>
+									{% if loop.index0 % 4 == 0 %}
+										<th align="center" rowspan="4">{{ time }}</th>
+									{% endif %}
+									{% for day in days %}
+										{% if sorted_times[loop.index0] and start_time(sorted_times[loop.index0])  == time%}
+											<th rowspan="{{get_event_length(sorted_times[loop.index0])}}">
+												<td align="center">
+													{% if total_dict[building][room][sorted_times[loop.index0]][day]%}
+														{% for line in get_list_format(total_dict[building][room][sorted_times[loop.index0]][day]) %}
+															{{line}}<br>
+														{% endfor %}
+													{% endif %}
+												</td>
+											</th>
+										{% else %}
+												<th></th>
+										{% endif %}
+									{% endfor %}
+								</tr>
+						{% endfor %}
+					{% endif %}	
+					</table>
+				{% endfor %}
+			{% else %}
+				<h6>Invalid Search</h6>
+			{% endif %}
+		</center>
+	<!-- -->
+	<!-- Do Something Else -->
 {% endblock %}

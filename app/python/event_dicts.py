@@ -1,6 +1,7 @@
 import copy
 import collections
-from datetime import datetime
+import datetime as dt
+from datetime import datetime,timedelta
 
 inputfile = open('textfiles/Rooms by Building.txt')
 my_text = inputfile.readlines()
@@ -251,3 +252,28 @@ def get_list_format(list):
 		ret.append(CRN + additional_crns)
 	return ret
 
+def get_event_length(time):
+	times = time.split(' - ')
+	start_time = datetime.strptime(times[0], "%I:%M %p")
+	end_time = datetime.strptime(times[1], "%I:%M %p")
+	dts = [dt.strftime('T%H:%M Z') for dt in datetime_range(start_time, end_time,timedelta(minutes=15))]
+	return len(dts)
+
+def time_span():
+	now = dt.datetime(2013, 2, 9, 8, 00)
+	end=now+dt.timedelta(hours=9)
+	l=[]
+	while now<=end:
+		l.append(now.strftime('%H:%M %p'))
+		now+=dt.timedelta(minutes=15)
+	return l
+
+def start_time(time):
+	start = time.split(' - ')[0]
+	return datetime.strptime(start, "%I:%M %p").strftime('%H:%M %p')
+
+def datetime_range(start, end, delta):
+    current = start
+    while current < end:
+        yield current
+        current += delta
