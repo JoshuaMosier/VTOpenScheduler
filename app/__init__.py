@@ -51,6 +51,8 @@ app.jinja_env.globals.update(get_string_format = event_dicts.get_string_format)
 app.jinja_env.globals.update(get_list_format = event_dicts.get_list_format)
 app.jinja_env.globals.update(start_time = event_dicts.start_time)
 app.jinja_env.globals.update(get_event_length = event_dicts.get_event_length)
+app.jinja_env.globals.update(formatted_table_input = event_dicts.formatted_table_input)
+app.jinja_env.globals.update(start_time_list = event_dicts.start_time_list)
 
 if __name__ == '__main__':
     app.run(debug=True)

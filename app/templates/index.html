@@ -15,7 +15,7 @@
 				{% for room in rooms %}
 					{% if total_dict[building][room] %}
 						<h2>{{building + ", Room " + rooms[loop.index0] }}</h2>
-					<table class = "table table-bordered table-condensed" style="width:1600px">
+					<table class = "table table-bordered table-condensed table-striped" style="width:1600px">
 						{% set sorted_times = get_sorted_times(building,room) %}
 						<tr>
 							<th style="width:200px"></th>
@@ -24,22 +24,22 @@
 								{% endfor %}
 						</tr>
 					{% endif %}
-						{% for time in sorted_times %}
-								<tr>
-									<th align="center">{{ time }}</th>
-									{% for day in days %}
-										{% if total_dict[building][room][time][day] %}
-											<td align="center">
-												{% for line in get_list_format(total_dict[building][room][time][day]) %}
-													{{line}}<br>
-												{% endfor %}
-											</td>
-										{% else %}
-											<td></td>
-										{% endif %}
-									{% endfor %}
-								</tr>
-						{% endfor %}
+					{% for time in sorted_times %}
+							<tr>
+								<th align="center">{{ time }}</th>
+								{% for day in days %}
+									{% if total_dict[building][room][time][day] %}
+										<td align="center">
+											{% for line in get_list_format(total_dict[building][room][time][day]) %}
+												{{line}}<br>
+											{% endfor %}
+										</td>
+									{% else %}
+										<td></td>
+									{% endif %}
+								{% endfor %}
+							</tr>
+					{% endfor %}
 					</table>
 				{% endfor %}
 			{% else %}
@@ -53,6 +53,7 @@
 		<center>
 			{% if rooms %}
 				{% for room in rooms %}
+
 					{% if total_dict[building][room] %}
 						<h2>{{building + ", Room " + rooms[loop.index0] }}</h2>
 					<table class = "table table-bordered table-condensed" style="width:1600px">
@@ -63,28 +64,46 @@
 									<th align="center" style="width:200px">{{ day }}</th>
 								{% endfor %}
 						</tr>
+						
+						<!-- Output 1 cell per min spanned 60
 						{% for time in time_span %}
-								<tr>
-									{% if loop.index0 % 4 == 0 %}
-										<th align="center" rowspan="4">{{ time }}</th>
-									{% endif %}
-									{% for day in days %}
-										{% if sorted_times[loop.index0] and start_time(sorted_times[loop.index0])  == time%}
-											<th rowspan="{{get_event_length(sorted_times[loop.index0])}}">
-												<td align="center">
-													{% if total_dict[building][room][sorted_times[loop.index0]][day]%}
-														{% for line in get_list_format(total_dict[building][room][sorted_times[loop.index0]][day]) %}
-															{{line}}<br>
-														{% endfor %}
-													{% endif %}
-												</td>
-											</th>
-										{% else %}
-												<th></th>
-										{% endif %}
-									{% endfor %}
-								</tr>
+							<tr>
+							{% if loop.index0 % 60 == 0 %}
+								<th rowpspan = "60">{{time}}</th>
+								{% for day in days %}
+								<td rowspan = "60"></td>
+								{% endfor %}
+							{% endif %}
+							</tr>
 						{% endfor %}
+						-->
+
+						<!-- Testing 3d array output to table -->
+						{% for time in time_span %}
+							{% set start_times = start_time_list(sorted_times) %}
+							<tr>							
+							{% if loop.index0 % 12 == 0 %}
+								<th rowspan = "12">{{time}}</th>
+							{% endif %}
+								{% for day in days %}
+									{% if time in start_times %}
+										{% set index = start_times.index(time) %}
+										{% if total_dict[building][room][sorted_times[index]][day] %}
+											<td align="center" rowspan = "{{get_event_length(sorted_times[index])}}" bgcolor="#ADD8E6">
+												{% for line in get_list_format(total_dict[building][room][sorted_times[index]][day]) %}
+													{{line}}<br>
+												{% endfor %}
+											</td>
+										{% else %}
+											<td></td>
+										{% endif %}
+									{% else %}
+										<td></td>
+									{% endif %}
+								{% endfor %}
+							</tr>
+						{% endfor %}
+
 					{% endif %}	
 					</table>
 				{% endfor %}

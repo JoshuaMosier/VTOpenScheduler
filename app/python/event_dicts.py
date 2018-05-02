@@ -256,24 +256,48 @@ def get_event_length(time):
 	times = time.split(' - ')
 	start_time = datetime.strptime(times[0], "%I:%M %p")
 	end_time = datetime.strptime(times[1], "%I:%M %p")
-	dts = [dt.strftime('T%H:%M Z') for dt in datetime_range(start_time, end_time,timedelta(minutes=15))]
+	dts = [dt.strftime('T%H:%M Z') for dt in datetime_range(start_time, end_time,timedelta(minutes=5))]
 	return len(dts)
 
 def time_span():
 	now = dt.datetime(2013, 2, 9, 8, 00)
-	end=now+dt.timedelta(hours=9)
+	end=now+dt.timedelta(hours=15)
 	l=[]
 	while now<=end:
 		l.append(now.strftime('%H:%M %p'))
-		now+=dt.timedelta(minutes=15)
+		now+=dt.timedelta(minutes=5)
 	return l
 
 def start_time(time):
 	start = time.split(' - ')[0]
 	return datetime.strptime(start, "%I:%M %p").strftime('%H:%M %p')
 
+def end_time(time):
+	end = time.split(' - ')[1]
+	return datetime.strptime(end, "%I:%M %p").strftime('%H:%M %p')
+
+def start_time_list(sorted_times):
+	ret = []
+	for time in sorted_times:
+		ret.append(start_time(time))
+	return ret
+
 def datetime_range(start, end, delta):
     current = start
     while current < end:
         yield current
         current += delta
+
+def formatted_table_input(building,room):
+	sorted_times = get_sorted_times(building,room)
+	times = time_span()
+	list = []
+	sub_list = []
+	for day in get_day_list():
+		for time in times:
+			for ind,event_time in enumerate(sorted_times):
+				if start_time(sorted_times[ind]) == time and total_dict[building][room][sorted_times[ind]][day]:
+					sub_list.append([time, end_time(sorted_times[ind]),total_dict[building][room][sorted_times[ind]][day]])
+		list.append(sub_list)
+		sub_list = []
+	return list
